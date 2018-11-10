@@ -10,3 +10,6 @@ Payment through Paykassa.pro
 - View or Manage orders received via Paykassa form
 - Quick settings configurations
 - Create button in any currency supported by Paykassa
+
+
+### Developer by: https://itmaker.uz
