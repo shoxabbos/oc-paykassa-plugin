@@ -12,6 +12,30 @@ tabs:
             span: auto
             tab: 'shohabbos.paykassa::lang.settings.tab_main'
             type: text
+        system:
+            default: 1
+            required: 1
+            label: 'shohabbos.paykassa::lang.settings.system'
+            tab: 'shohabbos.paykassa::lang.settings.tab_main'
+            span: auto
+            type: dropdown
+            options:
+                1: 'Payeer: RUB, USD'
+                2: 'Perfectmoney: USD'
+                4: 'Advcash:  RUB, USD'
+                7: 'Berty: RUB, USD'
+                11: 'Bitcoin: BTC'
+                12: 'Ethereum: ETH'
+                14: 'Litecoin: LTC'
+                15: 'Dogecoin: DOGE'
+                16: 'Dash: DASH'
+                18: 'Bitcoincash: BCH'
+                19: 'Zcash: ZEC'
+                20: 'Monero: XMR'
+                21: 'Ethereumclassic: ETC'
+                22: 'Ripple: XRP'
+                23: 'Neo: NEO'
+                24: 'Gas: GAS'
         currency:
             default: USD
             required: 1
@@ -19,6 +43,13 @@ tabs:
             span: auto
             tab: 'shohabbos.paykassa::lang.settings.tab_main'
             type: text
+        webhook:
+            default: '/paykassa-webhook'
+            label: 'shohabbos.paykassa::lang.settings.webhook'
+            span: auto
+            required: 1
+            type: text
+            tab: 'shohabbos.paykassa::lang.settings.tab_main'
         code:
             label: 'shohabbos.paykassa::lang.settings.code'
             type: codeeditor

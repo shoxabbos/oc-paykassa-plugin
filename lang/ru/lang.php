@@ -12,6 +12,8 @@
     	'merchant_password' => 'Merchant password',
         'code' => 'Events (init.php)',
         'currency' => 'Валюта платежа',
+        'webhook' => 'URL обработчика',
+        'system' => 'Платежная система',
         'code_desc' => 'Вы можете расширить функционал плагина с помощью событий или настроить под себя.',
     ],
     'transactions' => [

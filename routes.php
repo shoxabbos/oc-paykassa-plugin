@@ -1,0 +1,1 @@
+<?php Route::any('/paykassa-webhook', 'Shohabbos\Paykassa\Controllers\Paykassa@index');

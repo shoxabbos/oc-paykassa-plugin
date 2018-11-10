@@ -23,16 +23,16 @@ class Settings extends Model
 
 	public function afterSave()
 	{
-        // $path = self::get('status_url');
-        // $template = "<?php Route::any('{$path}', 'Shohabbos\Paykassa\Controllers\Payeer@index');";
+        $path = self::get('webhook');
+        $template = "<?php Route::any('{$path}', 'Shohabbos\Paykassa\Controllers\Paykassa@index');";
 
-        // $this->files->put(__DIR__ . '/'.'../routes.php', $template);
+        $this->files->put(__DIR__ . '/'.'../routes.php', $template);
 
-        // // write code
-        // $code = self::get('code', null);
-        // if ($code) {
-        //     $this->files->put(__DIR__ . '/'.'../init.php', $code);
-        // }
+        // write code
+        $code = self::get('code', null);
+        if ($code) {
+            $this->files->put(__DIR__ . '/'.'../init.php', $code);
+        }
         
 	}
 
