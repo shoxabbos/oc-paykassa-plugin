@@ -8,7 +8,7 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            \Shohabbos\Paykassa\Components\PayForm::class => 'payFormComponent',
+            \Shohabbos\Paykassa\Components\PayForm::class => 'paykassaPayForm',
         ];
     }
 

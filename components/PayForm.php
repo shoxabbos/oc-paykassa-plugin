@@ -4,7 +4,7 @@ use Input;
 use Validator;
 use ValidationException;
 use Cms\Classes\ComponentBase;
-use Shohabbos\Payeer\Models\Settings;
+use Shohabbos\Paykassa\Models\Settings;
 use Shohabbos\Paykassa\Classes\PayKassaSCI;
 
 /**
@@ -47,54 +47,40 @@ class PayForm extends ComponentBase
         $paramAmount = $this->property('paramAmount');
         $paramOrder = $this->property('paramOrder');
 
+        $data = Input::only([$paramAmount, $paramOrder]);
+
+        $validator = Validator::make($data, [
+            $paramOrder => 'required',
+            $paramAmount => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
+
         $paykassa_merchant_id = Settings::get("merchant_id");
         $paykassa_merchant_password = Settings::get("merchant_password");
-        $paykassa_currency = Settings::get("currency");
-
-        $amount = $paramAmount;
-        $system = 'bitcoin';
-        $currency = $paykassa_currency;
-        $order_id = $paramOrder;
-        $comment = 'comment';
 
         $paykassa = new PayKassaSCI( 
             $paykassa_merchant_id,       // идентификатор магазина
             $paykassa_merchant_password  // пароль магазина
         );
 
-        $system_id = [
-            "payeer"            => 1,  // поддерживаемая валюта RUB USD
-            "perfectmoney"      => 2,  // поддерживаемая валюта USD
-            "advcash"           => 4,  // поддерживаемая валюта RUB USD
-            "berty"             => 7,  // поддерживаемая валюта RUB USD
-            "bitcoin"           => 11, // поддерживаемая валюта BTC
-            "ethereum"          => 12, // поддерживаемая валюта ETH
-            "litecoin"          => 14, // поддерживаемая валюта LTC
-            "dogecoin"          => 15, // поддерживаемая валюта DOGE
-            "dash"              => 16, // поддерживаемая валюта DASH
-            "bitcoincash"       => 18, // поддерживаемая валюта BCH
-            "zcash"             => 19, // поддерживаемая валюта ZEC
-            "monero"            => 20, // поддерживаемая валюта XMR
-            "ethereumclassic"   => 21, // поддерживаемая валюта ETC
-            "ripple"            => 22, // поддерживаемая валюта XRP
-            "neo"               => 23, // поддерживаемая валюта NEO
-            "gas"               => 24, // поддерживаемая валюта GAS
-        ];
+        $currency = Settings::get("currency");
+        $system_id = Settings::get("system");
+        $amount = $data[$paramAmount];
+        $order_id = $data[$paramOrder];
 
-        $res = $paykassa->sci_create_order(
-            $amount,    // обязательный параметр, сумма платежа, пример: 1.0433
-            $currency,  // обязательный параметр, валюта, пример: BTC
-            $order_id,  // обязательный параметр, уникальный числовой идентификатор платежа в вашей системе, пример: 150800
-            $comment,   // обязательный параметр, текстовый комментарй платежа, пример: Заказ услуги #150800
-            $system_id[$system] // обязательный параметр, указав его Вас минуя мерчант переадресует на платежную систему, пример: 12 - Ethereum
-        );
 
-        if ($res['error']) {        // $res['error'] - true если ошибка
-            echo $res['message'];   // $res['message'] - текст сообщения об ошибке
-            //действия в случае ошибки
+        $res = $paykassa->sci_create_order($amount, $currency, $order_id, 'Comment', $system_id);
+
+
+        if ($res['error']) {
+            throw new ValidationException(['error' => $res['message']]);
         } else {
+            $this->page['amount'] = $amount;
+            $this->page['data'] = $res['data'];
         }
-
     }
 
 
