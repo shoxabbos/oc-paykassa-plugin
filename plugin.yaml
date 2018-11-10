@@ -1,0 +1,6 @@
+plugin:
+    name: 'shohabbos.paykassa::lang.plugin.name'
+    description: 'shohabbos.paykassa::lang.plugin.description'
+    author: Shohabbos
+    icon: oc-icon-money
+    homepage: 'https://itmaker.uz'

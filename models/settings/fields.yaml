@@ -1,0 +1,31 @@
+tabs:
+    fields:
+        merchant_id:
+            required: 1
+            label: 'shohabbos.paykassa::lang.settings.merchant_id'
+            comment: 'shohabbos.paykassa::lang.settings.merchant_id_desc'
+            span: auto
+            tab: 'shohabbos.paykassa::lang.settings.tab_main'
+            type: text
+        merchant_password:
+            required: 1
+            label: 'shohabbos.paykassa::lang.settings.merchant_password'
+            comment: 'shohabbos.paykassa::lang.settings.merchant_password_desc'
+            span: auto
+            tab: 'shohabbos.paykassa::lang.settings.tab_main'
+            type: text
+        currency:
+            default: USD
+            required: 1
+            label: 'shohabbos.paykassa::lang.settings.currency'
+            comment: 'shohabbos.paykassa::lang.settings.currency_desc'
+            span: auto
+            tab: 'shohabbos.paykassa::lang.settings.tab_main'
+            type: text
+        code:
+            label: 'shohabbos.paykassa::lang.settings.code'
+            type: codeeditor
+            size: giant
+            tab: 'shohabbos.paykassa::lang.settings.tab_code'
+            language: php
+            comment: 'shohabbos.paykassa::lang.settings.code_desc'
