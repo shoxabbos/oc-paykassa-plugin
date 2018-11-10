@@ -23,10 +23,13 @@ class Paykassa extends Controller
 
 	    $res = $paykassa->sci_confirm_order();
 
-	    if ($res['error']) {        // $res['error'] - true если ошибка
-	        die($res['message']); 	// $res['message'] - текст сообщения об ошибке
-	        // действия в случае ошибки
+	    if ($res['error']) {
+	        Event::fire('shohabbos.paykassa.onError', [$res]);
+			print_r($res);
+	        exit;
 	    } else {
+	    	Event::fire('shohabbos.paykassa.onSuccess', [$res]);
+
 	        // действия в случае успеха
 	        $id = $res["data"]["order_id"];        // уникальный числовой идентификатор платежа в вашем системе, пример: 150800
 	        $transaction = $res["data"]["transaction"]; // номер транзакции в системе paykassa: 96401

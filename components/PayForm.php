@@ -51,7 +51,7 @@ class PayForm extends ComponentBase
 
         $validator = Validator::make($data, [
             $paramOrder => 'required',
-            $paramAmount => 'required|integer',
+            $paramAmount => 'required',
         ]);
 
         if ($validator->fails()) {
