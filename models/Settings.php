@@ -8,7 +8,7 @@ class Settings extends Model
     public $implement = ['System.Behaviors.SettingsModel'];
 
     // A unique code
-    public $settingsCode = 'shohabbos_payeer_settings';
+    public $settingsCode = 'shohabbos_paykassa_settings';
 
     // Reference to field configuration
     public $settingsFields = 'fields.yaml';
