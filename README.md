@@ -12,4 +12,4 @@ Payment through Paykassa.pro
 - Create button in any currency supported by Paykassa
 
 
-### Developer by: https://itmaker.uz
+### Developed by: https://itmaker.uz
